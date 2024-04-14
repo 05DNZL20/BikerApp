@@ -29,7 +29,6 @@ struct RideList: View {
     
     var body: some View {
         NavigationSplitView {
-
             List {
                 Toggle(isOn: $showFavoritesOnly) {
                     Text("Favorites")

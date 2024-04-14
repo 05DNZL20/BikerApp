@@ -35,6 +35,7 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func startUpdatingLocation() {
             locationManager?.startUpdatingLocation()
+            log = "Location updates stopped"
             startTime = Date()
             resetDistanceAndTopSpeed()
             isUpdatingLocation = true

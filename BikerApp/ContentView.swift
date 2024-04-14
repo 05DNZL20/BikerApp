@@ -7,8 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import CoreLocation
-import CoreMotion
 
 
 struct ContentView: View {
@@ -22,8 +20,22 @@ struct ContentView: View {
     @State private var showSaveForm = false
     @State private var showCalibrationButton = true
     
-    @State private var name: String = "";
-    @State private var date: Date = .now;
+    
+    func startStopAction() {
+        if self.locationManager.isUpdatingLocation {
+            self.showSaveAlert = true
+            self.locationManager.stopUpdatingLocation()
+            self.motionManager.resetCalibration()
+            self.motionManager.stopMotionUpdates()
+            self.showCalibrationButton = true
+        } else {
+            self.motionManager.resetMaxAngle()
+            self.locationManager.resetDistanceAndTopSpeed()
+            self.locationManager.startUpdatingLocation()
+            self.motionManager.startMotionUpdates()
+            self.showCalibrationButton = false
+        }
+    }
 
     var body: some View {
         NavigationView{
@@ -152,19 +164,7 @@ struct ContentView: View {
                     .offset(x:90,y:165)
                     
                     Button(action: {
-                        if self.locationManager.isUpdatingLocation {
-                            self.showSaveAlert = true
-                            self.locationManager.stopUpdatingLocation()
-                            self.motionManager.resetCalibration()
-                            self.motionManager.stopMotionUpdates()
-                            self.showCalibrationButton = true
-                        } else {
-                            self.motionManager.resetMaxAngle()
-                            self.locationManager.resetDistanceAndTopSpeed()
-                            self.locationManager.startUpdatingLocation()
-                            self.motionManager.startMotionUpdates()
-                            self.showCalibrationButton = false
-                        }
+                        startStopAction()
                     }) {
                         Text(self.locationManager.isUpdatingLocation ? "Stop" : "Start")
                             .fontWeight(.bold)

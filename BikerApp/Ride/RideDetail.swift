@@ -50,17 +50,13 @@ struct RideDetail: View {
                     .offset(x:172,y:-96)
                 
                 Image("Motorrad")
-                //.frame(width: 360.71, height: 360)
                     .rotationEffect(.degrees(ride.maxAngle))
                 
                 Image("Ring-Angle")
-                //.frame(width: 220, height: 220)
                 
                 Image("Tilt Angle")
-                //.frame(width: 220, height: 220)
                 
                 Image("Needle")
-                //.frame(width: 220, height: 220)
                     .rotationEffect(.degrees(ride.maxAngle))
                 
                 Text("\(ride.leftRightAngle) Max:\n\(abs(ride.maxAngle), specifier: "%.0f")°")
