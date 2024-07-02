@@ -60,7 +60,7 @@ extension LocationManager: CLLocationManagerDelegate {
 
         if let lastLocation = lastLocation {
             let distance = lastLocation.distance(from: currentLocation)
-            totalDistance += distance / 1000.0 // convert to kilometers
+            totalDistance += distance / 1000.0
 
             speed = currentLocation.speed
 
